@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Contact</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1 class="head">Contact Page</h1>
+        <nav>
+            <ul class="nav_links">
+                <li><a href="attendance.html">Attendance</a></li>
+                <li><a href="assignment.html">Assignment</a></li>
+                <li><a href="timetable.html">Timetable</a></li>
+            </ul>
+        </nav>
+        <a href="contact_student.html"><button class="button">Contact</button></a>
+        <a href="index.html"><button class="button">Log Out</button></a>
+    </header>
+
+    <div class="contact_container">
+        <h1>Contact Form</h1>
+        <p>If you have any inquiries please fill in the form below. Feel free to contact us.</p>
+
+        <div class="contact-box">
+            <div class="contact-left">
+                <h3>Send your request</h3>
+                <form onsubmit="return validaterequest();">
+                    <br>
+                    <div class="input-row">
+                        <div class="input-group">
+                            Name <input type="text" placeholder="Example" required>
+                        </div>
+                        <div class="input-group">
+                            Phone <input type="number" placeholder="+60 123 456 789" required>
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-group">
+                            E-mail <input type="email" placeholder="example@gmail.com" required>
+                        </div>
+                        <div class="input-group">
+                            Subject <input type="text" placeholder="Subject" required>
+                        </div>
+                    </div>
+                    <label>Message</label>
+                    <textarea rows="5" placeholder="Your message" required></textarea>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+
+            <div class="contact-right">
+                <h3>Reach us</h3>
+                <div class="contact-table">
+                    <p>E-mail&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contactus@gmail.com</p><br>
+                    <p>Phone&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+60 123 456 789</p><br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

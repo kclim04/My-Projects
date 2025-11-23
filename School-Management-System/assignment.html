@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1 class="head">Student Portal</h1>
+        <nav>
+            <ul class="nav_links">
+                <li><a href="attendance.html">Attendance</a></li>
+                <li><a href="assignment.html">Assignment</a></li>
+                <li><a href="timetable.html">Timetable</a></li>
+            </ul>
+        </nav>
+        <a href="contact_student.html"><button class="button">Contact</button></a>
+        <a href="index.html"><button class="button">Log Out</button></a>
+    </header>
+
+    <div class="title_border">
+        <div class="title">
+            <h3>Assignment Submission</h3>
+        </div>
+    </div>
+
+    <div class="form2">
+        <form onsubmit="return validatefile();" class="function">
+            Assignment: <input type="file" required>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    <div class="table_div">
+        <table class="table" id="assignment_table">
+            <thead class="table_head">
+                <tr>
+                    <th>Subject</th>
+                    <th>Assignment Name</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Submission</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Web Fundamentals</td><td>Lab01</td><td>8 July 2024</td><td>Submitted</td>
+                    <td class="center">
+                        <button type="submit" onclick="return submit1();">Submit</button>
+                        <button type="submit" onclick="return unsubmit1();">Unsubmit</button>
+
+                    </td>
+                </tr>               
+                <tr><td>Object Oriented Programming</td><td>Lab3</td><td>12 July 2024</td><td>Submitted</td>
+                    <td class="center">
+                        <button type="submit" onclick="return submit2();">Submit</button>
+                        <button type="submit" onclick="return unsubmit2();">Unsubmit</button>
+                    </td>
+                </tr>
+                <tr><td>Web Fundamentals</td><td>Lab04</td><td>15 July 2024</td><td>Pending</td>
+                    <td class="center">
+                        <button type="submit" onclick="return submit3();">Submit</button>
+                        <button type="submit" onclick="return unsubmit3();">Unsubmit</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

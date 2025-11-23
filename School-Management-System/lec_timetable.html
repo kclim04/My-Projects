@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lecturer Timetable</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1 class="head">Lecturer Portal</h1>
+        <nav>
+            <ul class="nav_links">
+                <li><a href="lec_attendance.html">Attendance</a></li>
+                <li><a href="lec_assignment.html">Assignment</a></li>
+                <li><a href="lec_timetable.html">Timetable</a></li>
+            </ul>
+        </nav>
+        <a href="contact_lecturer.html"><button class="button">Contact</button></a>
+        <a href="index.html"><button class="button">Log Out</button></a>
+    </header>
+
+    <div class="title_border">
+        <div class="title">
+            <h3>Timetable Summary</h3>
+        </div>
+    </div>
+
+    <div class="table_div">
+        <button type="submit" onclick="editTimetable()">Edit Timetable</button><br>
+        <table id="lec_timetable">
+            <thead>
+                <tr>
+                <td>Time</td><td>8:00AM-10:00AM</td><td>10:00AM-12:00PM</td><td>12:00PM-2:00PM</td><td>2:00PM-4:00PM</td><td>4:00PM-6:00PM</td><td>6:00PM-8:00PM</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>Monday</td><td>MTH1114 (L)<br><br>Venue: Online</td><td></td><td>ENG1044 (W)<br><br>Venue: HALC 2</td><td></td><td>MTH1114 (T)<br><br>Venue: UC-3-6</td><td>WEB1201 (L)<br><br>Venue: Online</td>
+                </tr>
+                <tr>
+                <td>Tuesday</td><td></td><td></td><td>MTH1114 (L)<br><br>Venue: JC 2</td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                <td>Wednesday</td><td></td><td>ENG1044 (W)<br><br>Venue: HALC 1</td><td>PRG1203 (P)<br><br>Venue: SW-CL-1-9</td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                <td>Thursday</td><td></td><td></td><td>PRG1203 (L)<br><br>Venue: JC 1</td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                <td>Friday</td><td>WEB1201 (P)<br><br>Venue: UW-2-10</td><td></td><td></td><td>PRG1203 (L)<br><br>Venue: Online</td><td>WEB1201 (L)<br><br>Venue: Online</td><td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

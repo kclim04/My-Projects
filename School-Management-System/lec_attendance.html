@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lecturer Attendance</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1 class="head">Lecturer Portal</h1>
+        <nav>
+            <ul class="nav_links">
+                <li><a href="lec_attendance.html">Attendance</a></li>
+                <li><a href="lec_assignment.html">Assignment</a></li>
+                <li><a href="lec_timetable.html">Timetable</a></li>
+            </ul>
+        </nav>
+        <a href="contact_lecturer.html"><button class="button">Contact</button></a>
+        <a href="index.html"><button class="button">Log Out</button></a>
+    </header>
+
+    <div class="title_border">
+        <div class="title">
+            <h3>Generate Attendance Code</h3>
+        </div>
+    </div>
+
+    <div class="form3">
+        <div>
+            <form onsubmit="return generatecode();">
+                <div class="elements">
+                    <div class="input-group">
+                        Course ID <input type="text" id="course" name="course" required><br><br>
+                    </div>
+                    <div class="radio-buttons">
+                        Class Session <br><br>
+                        <input type="radio" id="lecture" name="class" value="Lecture">
+                            <label for="lecture">Lecture</label>
+                        <input type="radio" id="practical" name="class" value="Practical">
+                            <label for="practical">Practical</label>
+                        <input type="radio" id="workshop" name="class" value="Workshop">
+                            <label for="workshop">Workshop</label>
+                    </div>
+                    <br><br>
+                    <div class="radio-buttons">
+                        Day <br><br>
+                        <input type="radio" id="monday" name="day" value="Monday">
+                            <label for="monday">Monday</label>
+                        <input type="radio" id="tuesday" name="day" value="Tuesday">
+                            <label for="tuesday">Tuesday</label>
+                        <input type="radio" id="wednesday" name="day" value="Wednesday">
+                            <label for="wednesday">Wednesday</label>
+                        <input type="radio" id="thursday" name="day" value="Thursday">
+                            <label for="thursday">Thursday</label>
+                        <input type="radio" id="friday" name="day" value="Friday">
+                            <label for="friday">Friday</label>
+                    </div>
+                    <br><br>
+                    <div class="input-group">
+                        Time: <input type="time" id="time" name="time" required>
+                    </div>
+                    <br><br>
+                    <button type="submit">Generate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="title_border">
+        <div class="title">
+            <h3>Attendance Summary</h3>
+        </div>
+    </div>
+
+    <div class="table_div">
+        <table class="table" id="lec_attendance_table">
+            <thead class="table_head">
+                <tr>
+                    <th>Course Code</th>
+                    <th>Class Session</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Attendance Status</th>
+                    <th>Mark Attendance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Web Fundamentals</td><td>Lecture</td><td>8 July 2024</td><td>6:00 PM</td><td>24009664</td><td>Ivan Koh Wei Han</td><td>Present</td>
+                    <td class="center">
+                        <button type="submit" onclick="return changeattendanceP1();">Present</button>
+                        <button type="submit" onclick="return changeattendanceA1();">Absent</button>
+                    </td>
+                </tr>               
+                <tr><td>Web Fundamentals</td><td>Lecture</td><td>8 July 2024</td><td>6:00 PM</td><td>23009863</td><td>Lim Khoon Chyuan</td><td>Present</td>
+                    <td class="center">
+                        <button type="submit" onclick="return changeattendanceP2();">Present</button>
+                        <button type="submit" onclick="return changeattendanceA2();">Absent</button>
+                    </td>
+                </tr>
+                <tr><td>Object Oriented Programming</td><td>Lecture</td><td>12 July 2024</td><td>2:30 PM</td><td>22104012</td><td>Aragon Lee Kuan You</td><td>Present</td>
+                    <td class="center">
+                        <button type="submit" onclick="return changeattendanceP3();">Present</button>
+                        <button type="submit" onclick="return changeattendanceA3();">Absent</button>
+                    </td>
+                </tr>
+                <tr><td>Object Oriented Programming</td><td>Lecture</td><td>12 July 2024</td><td>2:30 PM</td><td>24008732</td><td>Thong Junhin</td><td>Present</td>
+                    <td class="center">
+                        <button type="submit" onclick="return changeattendanceP4();">Present</button>
+                        <button type="submit" onclick="return changeattendanceA4();">Absent</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

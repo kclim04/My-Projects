@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>Login and Register Lecturer</title>
+</head>
+
+<body class="login">
+
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form onsubmit="return register();" method="get" action="lec_attendance.html">
+                <h1>Create Account</h1>
+                <span>Register with E-mail</span>
+                <input type="text" id="username" placeholder="Enter Username" required>
+                <input type="email" placeholder="Enter E-mail" required>
+                <input type="password" placeholder="Enter Password" required>
+                <button>Sign Up</button>
+            </form>
+        </div>
+
+
+        <div class="form-container sign-in">
+            <form onsubmit="return login();" method="get" action="lec_attendance.html">
+                <h1>Sign In</h1>
+                <span>Login with Username & Password</span>
+                <input type="text" id="username" placeholder="Enter Username" required>
+                <input type="password" placeholder="Enter Password" required>
+                <button type="submit">Sign In</button>
+            </form>
+        </div>
+
+
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Welcome Lecturer!</h1>
+                    <p>Already have an account? Login now!</p>
+                    <button class="hidden" id="login">Sign In</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Welcome Lecturer!</h1>
+                    <p>Don't have an account? Register now!</p>
+                    <button class="hidden" id="register">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
