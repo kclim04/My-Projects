@@ -1,0 +1,145 @@
+{% extends 'layout.html' %} {% block nav %} {% if role == 1 %}
+<ul class="nav nav-pills nav-fill">
+  <li class="nav-item">
+    <a class="nav-link active" href="{{ url_for('attendance') }}">Attendance</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('assignment') }}">Assignment</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('timetable') }}">Time Table</a>
+  </li>
+</ul>
+{% else %}
+<ul class="nav nav-pills nav-fill">
+  <li class="nav-item">
+    <a class="nav-link active" href="{{ url_for('lec_attendance') }}"
+      >Lec Attendance</a
+    >
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('lec_assignment') }}">Lec Assignment</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('lec_timetable') }}">Lec Timetable</a>
+  </li>
+</ul>
+{% endif %} {% endblock %}
+
+{% block content %}
+ 
+<style>
+    .table-wrap {
+    overflow-x: scroll; }
+    table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    background: #fff;
+    -webkit-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+    -moz-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+    box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+  }
+  .table-wrap::-webkit-scrollbar {
+    display: none;
+  }
+  th {
+  text-align: inherit; }
+  .table thead.thead-primary {
+    background: #80c3d6;
+}
+.table tbody th, .table tbody td {
+    border: none;
+    padding: 15px;
+    font-size: 15px;
+    background: #fff;
+    border-bottom: 4px solid #f8f9fd;
+    vertical-align: middle;
+}
+.table thead th {
+    border: none;
+    padding: 27px;
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+}
+  </style>
+<div class="container">
+  <section style="padding: 10px">
+    <h3 class="my-0 mr-md-auto font-weight-normal font-weight-bold">Lecturer's Attendance</h3>
+    <em>Lecturers are able to check student's attendance status here.</em>
+  </section>
+
+<div class="card w-100">
+<div class="card-body">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-wrap">
+        <table class="table">
+          <thead class="thead-primary">
+              <tr>
+                <th>Class Session ID</th>
+                <th>Date</th>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Attendance Status</th>
+                <th>Mark Attendance</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in lecturerAttendance %}
+              <tr class="alert" role="alert">
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+                <td>{{item[3]}}</td>
+                {% if item[4] == 1 %}
+                <td>Pending</td>
+                {% elif item[4] == 2 %}
+                <td>Present</td>
+                {% elif item[4] == 3 %}
+                <td>Late</td>
+                {% elif item[4] == 4 %}
+                <td>Absent</td>
+                {% else %}
+                <td>Pending</td>
+                {% endif %}
+                <td>
+                  <form action="/lec_present" method="POST">
+                    <input
+                      type="hidden"
+                      id="lecattendanceIDForm"
+                      name="lecattendanceID"
+                      class="form-control mb-2"
+                      value="{{item[5]}}"
+                    />
+                    <button class="btn  btn-outline-success" type="submit">PRESENT</button>
+                  </form>
+                  <form action="/lec_absent" method="POST" class="mt-2">
+                    <input
+                      type="hidden"
+                      id="lecattendanceIDForm"
+                      name="lecattendanceID"
+                      class="form-control mb-2"
+                      value="{{item[5]}}"
+                    />
+                    <button class="btn btn-outline-danger" type="submit">
+                      ABSENT
+                    </button>
+                  </form>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</html>
+
+
+{% endblock %}

@@ -1,0 +1,135 @@
+{% extends 'layout.html' %} {% block nav %} {% if role == 1 %}
+<ul class="nav nav-pills nav-fill">
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('attendance') }}">Attendance</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="{{ url_for('assignment') }}">Assignment</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('timetable') }}">Time Table</a>
+  </li>
+</ul>
+{% else %}
+<ul class="nav nav-pills nav-fill">
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('lec_attendance') }}"
+      >Lec Attendance</a
+    >
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="{{ url_for('lec_assignment') }}"
+      >Lec Assignment</a
+    >
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('lec_timetable') }}">Lec Timetable</a>
+  </li>
+</ul>
+{% endif %} {% endblock %} {% block content %}
+
+<style>
+  .table-wrap {
+    overflow-x: scroll;
+  }
+  th {
+    text-align: inherit;
+  }
+  .table thead.thead-primary {
+    background: #80c3d6;
+  }
+  .table tbody th,
+  .table tbody td {
+    border: none;
+    padding: 10px;
+    font-size: 15px;
+    background: #fff;
+    border-bottom: 4px solid #f8f9fd;
+    vertical-align: middle;
+  }
+  .table thead th {
+    border: none;
+    padding: 27px;
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+  }
+</style>
+<div class="container">
+  <section style="padding: 10px">
+    <h3 class="my-0 mr-md-auto font-weight-normal font-weight-bold">
+      Lecturer's Assignment
+    </h3>
+    <em>Lecturers are able to check student's assignment status here.</em>
+  </section>
+
+  <div class="card w-100">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-wrap">
+            <table class="table">
+              <thead class="thead-primary">
+                <tr>
+                  <th>Class ID</th>
+                  <th>Student Name</th>
+                  <th>Status</th>
+                  <th>Assignment</th>
+                  <th>Grade</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in lecturerAssignment %}
+                <tr class="alert" role="alert">
+                  <td>{{item[0]}}</td>
+                  <td>{{item[1]}}</td>
+                  {% if item[5] == 1 %}
+                  <td>Pending</td>
+                  {% elif item[5] == 2 %}
+                  <td>Submitted</td>
+                  {% elif item[5] == 3 %}
+                  <td>Late Submit</td>
+                  {% elif item[5] == 4 %}
+                  <td>Pass</td>
+                  {% elif item[5] == 5 %}
+                  <td>Fail</td>
+                  {% else %}
+                  <td>Pending</td>
+                  {% endif %}
+                  <td>{{item[7]}}</td>
+                  <td>
+                    <form action="/lec_pass" method="POST">
+                      <input
+                        type="hidden"
+                        id="assignmentIDForm"
+                        name="lecassignmentID"
+                        class="form-control mb-2"
+                        value="{{item[6]}}"
+                      />
+                      <button class="btn  btn-outline-success" type="submit">PASS</button>
+                    </form>
+                    <form action="/lec_fail" method="POST" class="mt-2">
+                      <input
+                        type="hidden"
+                        id="lecassignmentIDForm"
+                        name="lecassignmentID"
+                        class="form-control mb-2"
+                        value="{{item[6]}}"
+                      />
+                      <button class="btn btn-outline-danger" type="submit">
+                        FAIL
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,323 @@
+{% extends 'layout.html' %} {% block nav %} {% if role == 1 %}
+<ul class="nav nav-pills nav-fill">
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('attendance') }}">Attendance</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('assignment') }}">Assignment</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="{{ url_for('timetable') }}">Time Table</a>
+  </li>
+</ul>
+{% else %}
+<ul class="nav nav-pills nav-fill">
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('lec_attendance') }}"
+      >Lec Attendance</a
+    >
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ url_for('lec_assignment') }}">
+      Lec Assignment</a
+    >
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="{{ url_for('lec_timetable') }}"
+      >Lec Timetable</a
+    >
+  </li>
+</ul>
+{% endif %} {% endblock %} {% block content %}
+<style>
+  .table-wrap {
+    overflow-x: scroll;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    background: #fff;
+    -webkit-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+    -moz-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+    box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+  }
+  .table-wrap::-webkit-scrollbar {
+    display: none;
+  }
+  th {
+    text-align: inherit;
+  }
+  .table thead.thead-primary {
+    background: #80c3d6;
+  }
+  .table tbody th,
+  .table tbody td {
+    border: none;
+    padding: 15px;
+    font-size: 15px;
+    background: #fff;
+    border-bottom: 4px solid #f8f9fd;
+    vertical-align: middle;
+  }
+  .table thead th {
+    border: none;
+    padding: 27px;
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+  }
+</style>
+<div class="container">
+  <div id="accordion">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button
+            class="btn btn-link"
+            data-toggle="collapse"
+            data-target="#collapseOne"
+            aria-expanded="true"
+            aria-controls="collapseOne"
+          >
+            Lecturer's Timetable
+          </button>
+        </h5>
+      </div>
+
+      <div
+        id="collapseOne"
+        class="collapse show"
+        aria-labelledby="headingOne"
+        data-parent="#accordion"
+      >
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="table-wrap">
+                <table class="table">
+                  <thead class="thead-primary">
+                    <tr>
+                      <th>Subject ID</th>
+                      <th>Date & Time</th>
+                      <th>Venue</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if lecturerTimetable|length > 0%}
+                    {% for item in lecturerTimetable %}
+                    <tr class="alert" role="alert">
+                      <td>{{item[0]}}</td>
+                      <td>{{item[1]}}</td>
+                      <td>{{item[2]}}</td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn-outline-success update-btn"
+                          data-toggle="modal"
+                          data-target="#exampleModalCenter"
+                          data-classid="{{item[3]}}"
+                          data-starttime="{{item[1]}}"
+                          data-endtime="{{item[4]}}"
+                          data-subjectid="{{item[5]}}"
+                          data-venueid="{{item[6]}}"
+                        >
+                        UPDATE
+                        </button>
+                        <form action="/lec_delete" method="POST" class="mt-2">
+                          <input
+                            type="hidden"
+                            id="classID"
+                            name="classID"
+                            class="form-control mb-2"
+                            value="{{item[3]}}"
+                          />
+                          <button class="btn btn-outline-danger" type="submit">
+                            DELETE
+                          </button>
+                        </form>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr class="alert" role="alert">
+                      <td colspan="4"> Not Records</td>
+                    </tr>
+                    {% endif %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button
+            class="btn btn-link collapsed"
+            data-toggle="collapse"
+            data-target="#collapseTwo"
+            aria-expanded="false"
+            aria-controls="collapseTwo"
+          >
+            Create Timetable
+          </button>
+        </h5>
+      </div>
+      <div
+        id="collapseTwo"
+        class="collapse"
+        aria-labelledby="headingTwo"
+        data-parent="#accordion"
+      >
+        <div class="card-body">
+          <form id="timetable-form" action="/lec_create" class="text-left" method="post">
+            <div class="form-group">
+              <label for="subjectId">Subject ID:</label>
+              <select name="subjectId" class="form-control" id="subjectId">
+                {% for item in subjectList %}
+                <option value="{{item[0]}}">{{item[1]}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="startDate">Start Date:</label>
+              <input type="text" id="datepicker" class="form-control" name="startDate" placeholder="Select Start Date and Time" required/>
+            </div>
+            <div class="form-group">
+              <label for="endDate">End Date:</label>
+              <input type="text" id="datepicker" class="form-control" name="endDate" placeholder="Select End Date and Time" required/>
+            </div>
+            
+            <div class="form-group">
+              <label for="venue">Venue:</label>
+              <select name="venue" class="form-control" id="venue">
+                {% for item in venueList %}
+                <option value="{{item[0]}}">{{item[1]}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Create</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div
+  class="modal fade"
+  id="exampleModalCenter"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">
+          Edit Timetable
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/lec_update" method="POST">
+        <div class="modal-body text-left">
+          <input
+            type="hidden"
+            id="classIDForm"
+            name="classID"
+            class="form-control mb-2"
+          />
+          <div class="form-group">
+            <label for="subjectIdEdit">Subject ID:</label>
+            <select name="subjectIdEdit" class="form-control" id="subjectIdEdit">
+              {% for item in subjectList %}
+              <option value="{{item[0]}}">{{item[1]}}</option>
+              {% endfor %}
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="startDateEdit">Start Date:</label>
+            <input type="text" id="startDateEdit" class="form-control" name="startDateEdit" placeholder="Select Start Date and Time" required/>
+          </div>
+          <div class="form-group">
+            <label for="endDateEdit">End Date:</label>
+            <input type="text" id="endDateEdit" class="form-control" name="endDateEdit" placeholder="Select End Date and Time" required/>
+          </div>
+          
+          <div class="form-group">
+            <label for="venueEdit">Venue:</label>
+            <select name="venueEdit" class="form-control" id="venueEdit">
+              {% for item in venueList %}
+              <option value="{{item[0]}}">{{item[1]}}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button type="submit" class="btn btn-success">
+            Update Timetable
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+  flatpickr('#datepicker', {
+    enableTime: true, // Enable time selection
+    dateFormat: "Y-m-d H:i", // Date and time format
+    // Add more options as needed
+  });
+  flatpickr('#startDateEdit', {
+    enableTime: true, // Enable time selection
+    dateFormat: "Y-m-d H:i", // Date and time format
+    // Add more options as needed
+  });
+  flatpickr('#endDateEdit', {
+    enableTime: true, // Enable time selection
+    dateFormat: "Y-m-d H:i", // Date and time format
+    // Add more options as needed
+  });
+  
+   
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+   $(".update-btn").on("click", function (event) {
+    var classid = $(this).data("classid");
+    var starttime = $(this).data("starttime");
+    var endtime = $(this).data("endtime");
+    var subjectid = $(this).data("subjectid");
+    var venueid = $(this).data("venueid");
+
+    $("#classIDForm").val("");
+    $("#classIDForm").val(classid);
+    $("#subjectIdEdit").val(subjectid);
+    $("#startDateEdit").val(starttime);
+    $("#endDateEdit").val(endtime);
+    $("#venueEdit").val(venueid);
+    
+  });
+</script>
+
+{% endblock %}

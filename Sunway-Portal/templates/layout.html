@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta
+      name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
+    />
+    <meta name="generator" content="Jekyll v3.8.5" />
+    <title>EduHub Student Management</title>
+    <link rel="icon" href="https://sunwayuniversity.edu.my/themes/custom/sunway/favicon.ico" type="image/vnd.microsoft.icon" />
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/4.3/examples/pricing/"
+    />
+
+    <!-- Bootstrap core CSS -->
+   <!-- Add these lines to include Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Date Time Picker  -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+  <!-- Add these lines to include Bootstrap JS with jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  
+
+  
+    <style>
+      .getSubjectCode{
+        text-align: left;
+        font-size: 14px;
+      }
+       .bg-custom-color {
+        background-color: #14A3C7;
+      }
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .nav-pills .nav-link.active,
+      .nav-pills .show > .nav-link {
+        color: black;
+        background-color: #fcf7eb;
+      }
+
+      .nav-item a {
+        color: white;
+        text-decoration: none;
+        background-color: transparent;
+      }
+
+      body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #fcf7eb;
+      }
+
+      
+      .container {
+          width: 80%;
+          margin: auto;
+          padding: 20px;
+      }
+      
+      section {
+          padding: 20px;
+          margin-top: 20px;
+      }
+
+      footer {
+          background-color:#14A3C7;
+          color: #fff;
+          text-align: center;
+          padding: 20px 0;
+          width: 100%;
+          position: fixed;
+          bottom: 0;
+      }
+
+      .assignment-box{
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        /* box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset; */
+      }
+    </style>
+  
+  </head>
+  <body style="margin-bottom: 10rem;" >
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-custom-color text-white border-bottom shadow-sm">
+      <h5 class="my-0 mr-md-auto font-weight-normal font-weight-bold">
+        Sunway Student Portal
+      </h5>
+      {% block nav %}{% endblock %}
+      <form action="/logout" method="post">
+        <button class="btn btn-danger ml-3" name="signoutBtn" type="submit">Sign Out</button>
+      </form>
+    </div>    
+
+    <div class="container">
+      <div class="card-deck mb-3 text-center">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+    <footer>
+      <p>&copy; 2024 EduHub Management System. All rights reserved.</p>
+    </footer>
+    </div>
+  </body>
+</html>
